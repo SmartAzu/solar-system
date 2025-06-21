@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>Solar System</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- 只有这一段 import map，就足够让所有 examples/jsm/* 解析到 three -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./three.js-r153/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- 左侧行星列表会由 main.js 动态填充 -->
+  <aside id="sidebar"></aside>
+
+  <!-- three.js 渲染画布会在 main.js 中创建并插入 -->
+
+  <!-- 入口脚本：直接使用相对路径导入，不再需要 import map -->
+  <script type="module">
+    import * as THREE            from './three.js-r153/build/three.module.js';
+    import { OrbitControls }     from './three.js-r153/examples/jsm/controls/OrbitControls.js';
+    import Stats                 from './three.js-r153/examples/jsm/libs/stats.module.js';
+
+    import { initSolarSystem }   from './js/main.js';
+
+    // 启动场景
+    initSolarSystem(THREE, OrbitControls, Stats);
+  </script>
+</body>
+</html>

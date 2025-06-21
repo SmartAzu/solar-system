@@ -1,0 +1,77 @@
+/* ========== 全局 ========== */
+:root{
+  --accent:        #00adff;      /* 亮青，苹果配色 */
+  --accent-hover:  #39c5ff;
+  --glass-bg:      rgba(35,38,45,.42);
+  --glass-border:  rgba(255,255,255,.18);
+  --glass-shadow:  0 6px 18px rgba(0,0,0,.45);
+  --panel-blur:    blur(16px) saturate(180%);
+  --font:          -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html,body{
+  margin:0;height:100%;overflow:hidden;
+  font-family:var(--font);background:#050509;color:#f0f3f5;
+}
+canvas{display:block}
+
+/* ===== 左侧行星列表 ===== */
+#sidebar{
+  position:fixed;left:0;top:0;bottom:0;width:200px;
+  padding:20px 14px 90px;   /* 为速率面板腾出空间 */
+  overflow-y:auto;box-sizing:border-box;
+  background:var(--glass-bg);backdrop-filter:var(--panel-blur);
+  border-right:1px solid var(--glass-border);box-shadow:var(--glass-shadow);
+}
+.planet-item{
+  cursor:pointer;margin:8px 0;padding:9px 12px;border-radius:8px;
+  transition:background .25s,color .25s;user-select:none
+}
+.planet-item:hover{background:var(--accent-hover);color:#fff}
+.planet-item:active{background:var(--accent)}
+
+/* ===== 右上退出按钮 ===== */
+#exitFollow{
+  position:fixed;right:24px;top:24px;padding:7px 16px;border:0;border-radius:7px;
+  background:var(--accent);color:#fff;font-size:14px;cursor:pointer;
+  box-shadow:var(--glass-shadow);opacity:0;pointer-events:none;
+  transition:opacity .35s ease,transform .35s ease,background .25s
+}
+#exitFollow:hover{background:var(--accent-hover)}
+#exitFollow.show{opacity:1;pointer-events:auto;transform:none}
+#exitFollow.hide{opacity:0;pointer-events:none;transform:translateY(-10px)}
+
+/* ===== 右下科普弹窗 ===== */
+#infoBox{
+  position:fixed;right:24px;bottom:24px;width:300px;max-height:48vh;
+  padding:18px 20px;border-radius:14px;overflow:auto;
+  background:var(--glass-bg);backdrop-filter:var(--panel-blur);
+  border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);
+  line-height:1.5em;font-size:15px;opacity:0;pointer-events:none;
+  transform:translateY(20px);
+  transition:opacity .35s ease,transform .35s ease
+}
+#infoBox.show{opacity:1;pointer-events:auto;transform:none}
+#infoBox h3{margin:0 0 8px;font-size:18px;color:#fff}
+
+/* ===== 速率调节面板（嵌入侧栏底部） ===== */
+#speedBox{
+  position:absolute;left:14px;right:14px;bottom:20px;
+  display:flex;justify-content:space-between;gap:8px;
+  background:var(--glass-bg);backdrop-filter:var(--panel-blur);
+  padding:8px 12px;border-radius:12px;border:1px solid var(--glass-border)
+}
+.speed-btn{
+  flex:1 1 0;width:34px;height:34px;border:0;border-radius:7px;cursor:pointer;
+  background:#40434a;color:#e9eaec;font-size:15px;font-weight:600;
+  transition:background .25s,color .25s,transform .2s
+}
+.speed-btn:hover{background:#60646c}
+.speed-btn:active{transform:scale(.9)}
+.speed-active{background:var(--accent);color:#fff}
+
+/* ===== 自定义滚动条 ===== */
+#sidebar::-webkit-scrollbar,#infoBox::-webkit-scrollbar{width:6px}
+#sidebar::-webkit-scrollbar-thumb,#infoBox::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.25);border-radius:3px
+}
